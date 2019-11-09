@@ -32,7 +32,7 @@ from gym.utils import seeding, EzPickle
 #
 # Created by Oleg Klimov. Licensed on the same terms as the rest of OpenAI Gym.
 
-FPS    = 50
+FPS    = 100
 SCALE  = 30.0   # affects how fast-paced the game is, forces should be adjusted as well
 
 MAIN_ENGINE_POWER  = 13.0
@@ -363,7 +363,7 @@ class LunarLanderContinuous(LunarLander):
 
 def heuristic(env, s):
     # Heuristic for:
-    # 1. Testing. 
+    # 1. Testing.
     # 2. Demonstration rollout.
     angle_targ = s[0]*0.5 + s[2]*1.0         # angle should point towards center (s[0] is horizontal coordinate, s[2] hor speed)
     if angle_targ >  0.4: angle_targ =  0.4  # more than 0.4 radians (22 degrees) is bad
@@ -416,5 +416,3 @@ def demo_heuristic_lander(env, seed=None, render=False):
 
 if __name__ == '__main__':
     demo_heuristic_lander(LunarLander(), render=True)
-    
-    
