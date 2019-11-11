@@ -24,7 +24,6 @@ def linear_approximation_lander(theta, lr, env, seed=None, render=False, num_ite
             s, r, done, info = env.step(a)
 
             s = np.append(s, 1.0)
-            r -= steps / 100
 
             theta[a] += lr * (r - predicted_reward[a]) * s
 
@@ -39,7 +38,7 @@ def linear_approximation_lander(theta, lr, env, seed=None, render=False, num_ite
                 print("step {} total_reward {:+0.2f}".format(steps, total_reward))
             steps += 1
             if done: break
-            
+
     return theta
 
 
