@@ -4,11 +4,12 @@ import lunar_lander as lander
 
 
 def linear_approximation_lander(theta, lr, env, seed=None, render=False, num_iter=50):
-    env.seed(seed)
-    total_reward = 0
-    steps = 0
 
     for it in range(num_iter):
+        env.seed(seed)
+        total_reward = 0
+        steps = 0
+
         s = env.reset()
         s = np.append(s, 1.0)
 
