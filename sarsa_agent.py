@@ -18,11 +18,11 @@ def state_extractor(s):
     #         int(s[7]))
 
     state = (min(3, max(-3, int((s[2]) / 0.1))), \
-            min(20, max(20, int((s[2]) / 0.1))), \
-            min(5, max(-5, int((s[2]) / 0.1))), \
-            min(5, max(-5, int((s[3]) / 0.1))), \
-            min(5, max(-5, int((s[4]) / 0.1))), \
-            min(5, max(-5, int((s[5]) / 0.1))), \
+            min(3, max(-3, int((s[2]) / 0.1))), \
+            min(3, max(-3, int((s[2]) / 0.1))), \
+            min(3, max(-3, int((s[3]) / 0.1))), \
+            min(3, max(-3, int((s[4]) / 0.1))), \
+            min(3, max(-3, int((s[5]) / 0.1))), \
             int(s[6]), \
             int(s[7]))
 
