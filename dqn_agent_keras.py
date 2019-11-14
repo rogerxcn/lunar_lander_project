@@ -23,16 +23,6 @@ memory = deque(maxlen=1000000)
 min_eps = 0.01
 model = model
 
-
-def store_experience(state, action, next_state, reward, finished):
-    memory.append((state, action, next_state, reward, finished))
-
-def take_action(input):
-    if np.random.random() <= epsilon:
-        return np.random.choice(4)
-    action_values = model.predict(input)
-    return np.argmax(action_values[0])
-
 def replay_experiences():
     if len(memory) >= batch_size:
         sample_choices = np.array(memory)
@@ -78,11 +68,17 @@ if __name__ == '__main__':
         finished = False
         for j in range(3000):
             state = np.reshape(state, (1, 8))
-            action = take_action(state)
+            if np.random.random() <= epsilon:
+                action =  np.random.choice(4)
+            else:
+                action_values = model.predict(state)
+                action = np.argmax(action_values[0])
+
             env.render()
             next_state, reward, finished, metadata = env.step(action)
             next_state = np.reshape(next_state, (1, 8))
-            store_experience(state, action, next_state, reward, finished)
+            memory.append((state, action, next_state, reward, finished))
+
             replay_experiences()
             score += reward
             state = next_state
