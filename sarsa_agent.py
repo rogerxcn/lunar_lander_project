@@ -1,5 +1,7 @@
 import collections
 import random
+import json
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -7,26 +9,14 @@ import lunar_lander as lander
 
 
 def state_extractor(s):
-
-    # state = (int((s[0] - 0.3 / 2.0) / 0.3), \
-    #         int((s[1] - 0.3 / 2.0) / 0.3), \
-    #         int((s[2] - 0.4 / 2.0) / 0.4), \
-    #         int((s[3] - 0.4 / 2.0) / 0.4), \
-    #         int((s[4] - 0.2 / 2.0) / 0.2), \
-    #         int((s[5] - 0.4 / 2.0) / 0.4), \
-    #         int(s[6]), \
-    #         int(s[7]))
-
-    state = (min(3, max(-3, int((s[2]) / 0.1))), \
-            min(3, max(-3, int((s[2]) / 0.1))), \
+    state = (min(5, max(-5, int((s[0]) / 0.05))), \
+            min(5, max(-1, int((s[1]) / 0.1))), \
             min(3, max(-3, int((s[2]) / 0.1))), \
             min(3, max(-3, int((s[3]) / 0.1))), \
             min(3, max(-3, int((s[4]) / 0.1))), \
             min(3, max(-3, int((s[5]) / 0.1))), \
             int(s[6]), \
             int(s[7]))
-
-    # print(s[4], s[5])
 
     return state
 
@@ -43,14 +33,14 @@ def policy_explorer(s, Q, iter):
     rand = np.random.randint(0, 100)
 
     threshold = 50
-    if iter > 100:
-        threshold = 20
-    if iter > 2000:
+    if iter > 200:
         threshold = 10
-    if iter > 5000:
+    if iter > 2000:
         threshold = 5
-    if iter > 7500:
+    if iter > 5000:
         threshold = 1
+    if iter > 7500:
+        threshold = 0
 
     if rand >= threshold:
         Qv = np.array([ Q[sa_key(s, action)] for action in [0, 1, 2, 3]])
@@ -146,7 +136,10 @@ def main():
 
     np.savetxt("results/sarsa_reward.txt", y)
 
-
+    q = json.dumps(Q, indent=4)
+    f = open("results/sarsa_Q.json","w")
+    f.write(q)
+    f.close()
 
 
 if __name__ == '__main__':
