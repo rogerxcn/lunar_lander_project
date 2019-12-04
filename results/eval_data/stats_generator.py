@@ -11,14 +11,14 @@ g2 = np.loadtxt(fn2)
 
 x = np.linspace(0, x_length, g1.shape[0]-1)
 
-plt.plot(x, g1[1:], label='POMDP', color="green", alpha=0.4)
-plt.plot([0, x_length], [np.mean(g1), np.mean(g1)], '--', color="green")
-plt.plot(x, g2[1:], label='Vanilla', color="blue", alpha=0.4)
-plt.plot([0, x_length], [np.mean(g2), np.mean(g2)], '--', color="blue")
+plt.plot(x, g1[1:], label='POMDP', color="green", alpha=0.5)
+plt.plot([0, x_length], [np.mean(g1), np.mean(g1)], '--', color="green", alpha=0.8)
+plt.plot(x, g2[1:], label='Vanilla', color="blue", alpha=0.5)
+plt.plot([0, x_length], [np.mean(g2), np.mean(g2)], '--', color="blue", alpha=0.8)
 
 plt.legend()
 plt.title("POMDP Agent vs Vanilla Agent")
 plt.xlabel("Iterations")
 plt.ylabel("Average Reward")
 
-plt.savefig("fusion.png")
+plt.savefig("pomdp_vs_vanilla.png")
