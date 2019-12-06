@@ -145,7 +145,7 @@ def main():
         Q = json.load(json_file)
 
     env = lander.LunarLander()
-    r_seq = noisy_lander(env, Q, render=False, num_iter=num_iter, seg=10)
+    r_seq = noisy_lander(env, Q, render=True, num_iter=num_iter, seg=10)
 
     y = np.array(r_seq)
     x = np.linspace(0, num_iter, y.shape[0])
