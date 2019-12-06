@@ -76,7 +76,10 @@ if __name__ == '__main__':
                 action = np.argmax(action_values[0])
 
             env.render()
-            next_state, reward, finished, metadata = env.step(action)
+            if np.random.random() > 0.2:
+                next_state, reward, finished, metadata = env.step(action)
+            else:
+                next_state, reward, finished, metadata = env.step(0)
             next_state = np.reshape(next_state, (1, 8))
             memory.append((state, action, next_state, reward, finished))
             replay_experiences()
